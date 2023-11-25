@@ -99,3 +99,9 @@ def generate(rng: np.random.RandomState, depth: int, branching_ratio: int,
                 traced_solution=answer,
                 final_solution=steps[-1],
                 statements=statements)
+
+
+def num_statements(depth: int, branching_ratio: int) -> int:
+  rng = np.random.RandomState(0)
+  prompt = generate(rng, depth=depth, branching_ratio=branching_ratio, shuffle_statements=False)
+  return len(prompt.statements)
