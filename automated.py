@@ -5,6 +5,7 @@ import datetime
 import numpy as np
 import yaml
 from absl import app, flags, logging
+
 from backends.openai_backend import OpenAiBackend
 from evaluation_types import Evaluation, EvaluationMeta, Param, Result
 from generate_problem import generate
@@ -34,7 +35,9 @@ MODEL = flags.DEFINE_enum(
     help='The model to use',
 )
 
-PROMPT_NAME = flags.DEFINE_string('prompt_name', default='tutor', help='The name of the System prompt.')
+PROMPT_NAME = flags.DEFINE_string('prompt_name',
+                                  default='tutor',
+                                  help='The name of the System prompt.')
 
 CASES: tuple[Param, ...] = (
     Param(1, 1),
@@ -50,6 +53,14 @@ CASES: tuple[Param, ...] = (
     Param(2, 4),
     Param(2, 5),
     Param(2, 6),
+    Param(2, 7),
+    Param(2, 8),
+    Param(2, 9),
+    # Param(2, 10),
+    # Param(2, 11),
+    # Param(2, 12),
+    # Param(2, 13),
+    # Param(2, 14),
     Param(3, 2),
     Param(3, 3),
     Param(3, 4),
@@ -64,9 +75,8 @@ def main(argv):
     logging.warning('non-flag arguments: %s', argv)
 
   with open('prompts.yaml', mode='rt', encoding='utf-8') as f:
-    system_prompts = yaml.safe_load(f)  
+    system_prompts = yaml.safe_load(f)
     system_prompt = system_prompts[PROMPT_NAME.value]
-    
 
   backend = OpenAiBackend(system_prompt, model_name=MODEL.value)
 
@@ -81,7 +91,7 @@ def main(argv):
         f' and {prompt.statements[-1]}')
     question = f'Given the following variables:\n{premises}\n{prompt.question}'
     answer = backend.sample(question)
-    final_answer = answer.replace('.', '').split()[-1]
+    final_answer = answer.replace('.', '').replace('=', ' ').split()[-1]
     correct = final_answer == prompt.final_solution
 
     results.append(

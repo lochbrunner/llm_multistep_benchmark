@@ -33,13 +33,24 @@ class Alphabet(SupportsNext[str]):
     self._index += 1
     if self._index < 26:
       return string.ascii_uppercase[self._index]
-    elif self._index < 26 * 27:
-      i = self._index // 26 - 1
-      j = self._index % 26
+    elif self._index < 26**2 + 26 or _USE_SUBSCRIPT.value:
+      index = self._index - 26
+      i = index // 26 - 1
+      j = index % 26
       if _USE_SUBSCRIPT.value:
         return f'{string.ascii_uppercase[i]}_{j}'
       else:
         return string.ascii_uppercase[i] + string.ascii_uppercase[j]
+    elif self._index < 26**3 + 26**2 + 26:
+      index = self._index - (26**2 + 26)
+      i = (
+          index // (26**2) - 1,
+          (index // 26 - 1) % 26,
+          index % 26,
+      )
+      return ''.join(string.ascii_uppercase[k] for k in i)
+    else:
+      raise NotImplementedError(f'No word implemented for index {self._index}.')
 
   @property
   def used(self):
@@ -103,5 +114,8 @@ def generate(rng: np.random.RandomState, depth: int, branching_ratio: int,
 
 def num_statements(depth: int, branching_ratio: int) -> int:
   rng = np.random.RandomState(0)
-  prompt = generate(rng, depth=depth, branching_ratio=branching_ratio, shuffle_statements=False)
+  prompt = generate(rng,
+                    depth=depth,
+                    branching_ratio=branching_ratio,
+                    shuffle_statements=False)
   return len(prompt.statements)

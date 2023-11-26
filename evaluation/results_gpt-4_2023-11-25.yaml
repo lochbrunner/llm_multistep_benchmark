@@ -248,6 +248,41 @@ results:
     \ = 4."
 - !!python/object:evaluation_types.Result
   correct: true
+  gt_solution: '12'
+  param: !!python/object:evaluation_types.Param
+    branching_ratio: 2
+    depth: 7
+  sampled_answer: "EK is defined as BP. \n\nLooking at the definition of BP, we can\
+    \ see that BP equals AJ. \n\nAJ, in turn, is defined as AB.\n\nAnd AB is equal\
+    \ to T. \n\nSo EK is defined as T. \n\nNow, looking at the definition of T, it's\
+    \ defined as Q.\n\nFinally, the definition of Q is given as O, and O is defined\
+    \ as F.\n\nTherefore, EK is F. \n\nLooking up the value for F, we see that F equals\
+    \ 12. \n\nSo, EK = 12."
+- !!python/object:evaluation_types.Result
+  correct: true
+  gt_solution: '8'
+  param: !!python/object:evaluation_types.Param
+    branching_ratio: 2
+    depth: 8
+  sampled_answer: "The variable JK is given the value CG in the equation. \n\nCG =\
+    \ BW, \n\nBW = AL, \n\nAL = Z, \n\nZ = W, \n\nW = R, \n\nR = Q, \n\nQ = M, \n\n\
+    and given that M = 8,\n\nSo, JK = 8."
+- !!python/object:evaluation_types.Result
+  correct: true
+  gt_solution: '8'
+  param: !!python/object:evaluation_types.Param
+    branching_ratio: 2
+    depth: 9
+  sampled_answer: "Given in the problem, TI=EQ. \n\nTo find the value of EQ, we refer\
+    \ back to our variable list and we can see that EQ equals CH. \n\nThen referring\
+    \ again to our variable list, CH equals BI. \n\nAnd referring again, BI equals\
+    \ AR. \n\nReferring once more, AR equals AA. \n\nFinally referring back to AA,\
+    \ we find that AA equals W, and looking at the value of W, we see that W equals\
+    \ U.\n\nReferring to the variable list one last time, we see that U equals S.\n\
+    \nLooking at the value for S, we see that S equals E, and the value for E is given\
+    \ as 8.\n\nSo, TI=EQ=CH=BI=AR=AA=W=U=S=E=8.\n\nTherefore, the value of TI is 8."
+- !!python/object:evaluation_types.Result
+  correct: true
   gt_solution: '1'
   param: !!python/object:evaluation_types.Param
     branching_ratio: 3

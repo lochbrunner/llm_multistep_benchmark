@@ -7,6 +7,7 @@ import pathlib
 
 import yaml
 from absl import app, logging
+
 from evaluation_types import Evaluation, EvaluationMeta, Param
 from generate_problem import num_statements
 
@@ -26,7 +27,8 @@ def main(argv):
 
   table = Table()
   models: list[EvaluationMeta] = []
-  for i, filename in enumerate(pathlib.Path('./evaluation').glob('*.yaml')):
+  for i, filename in enumerate(
+      sorted(pathlib.Path('./evaluation').glob('*.yaml'))):
     logging.info('Loading %s ...', filename)
 
     with filename.open('rt') as f:
@@ -42,14 +44,17 @@ def main(argv):
     f.write('# Report\n\n')
     f.write('## Benchmark\n\n')
     num_models = len(table.model_names)
-    f.write('branching ratio | depth | ' + ' | '.join(table.model_names) + ' | #statements\n')
+    f.write('branching ratio | depth | ' + ' | '.join(table.model_names) +
+            ' | #statements\n')
     f.write(' | '.join('---' for _ in range(3 + num_models)) + '\n')
     for test_case, results in table.test_cases.items():
       f.write(f'{test_case.branching_ratio} | {test_case.depth} | ')
       row = [' '] * num_models
       for i, result in results.items():
         row[i] = '✓' if result else '✗'
-      f.write(' | '.join(row) + f' | {num_statements(test_case.depth, test_case.branching_ratio)}\n')
+      f.write(
+          ' | '.join(row) +
+          f' | {num_statements(test_case.depth, test_case.branching_ratio)}\n')
 
     f.write('\n## Used Models\n\n')
     for model in models:

@@ -205,6 +205,44 @@ results:
     depth: 6
   sampled_answer: BW is equal to AP, which is equal to X.
 - !!python/object:evaluation_types.Result
+  correct: false
+  gt_solution: '8'
+  param: !!python/object:evaluation_types.Param
+    branching_ratio: 2
+    depth: 7
+  sampled_answer: 'Based on the given variables, we know that EK = BI.
+
+
+    Plugging in the value of BI from the given variables, we find that BI = AF.
+
+
+    Plugging in the value of AF, we find that AF = AC.
+
+
+    Plugging in the value of AC, we find that AC = S.
+
+
+    Therefore, EK = S.
+
+
+    The value of EK is S.'
+- !!python/object:evaluation_types.Result
+  correct: false
+  gt_solution: '11'
+  param: !!python/object:evaluation_types.Param
+    branching_ratio: 2
+    depth: 8
+  sampled_answer: "Based on the given variables, JK can be found by substituting the\
+    \ value of JK into the equation. \n\nJK = CR (as given)\n\nSubstituting the given\
+    \ values,\n\nJK = CR = CB = BS\n\nTherefore, JK is equal to BS."
+- !!python/object:evaluation_types.Result
+  correct: false
+  gt_solution: '14'
+  param: !!python/object:evaluation_types.Param
+    branching_ratio: 2
+    depth: 9
+  sampled_answer: Based on the given variables, we know that TI is equal to JF.
+- !!python/object:evaluation_types.Result
   correct: true
   gt_solution: '0'
   param: !!python/object:evaluation_types.Param

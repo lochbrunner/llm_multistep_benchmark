@@ -1,0 +1,4 @@
+[style]
+indent_width: 2
+split_before_named_assigns: True
+column_limit: 80
